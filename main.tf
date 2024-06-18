@@ -44,14 +44,7 @@ resource "aws_s3_bucket" "c1" {
   acl    = var.s3_buckets[2].acl
 }
 
-locals {
-  s3_buckets_map = {
-    "example-a1" = var.s3_buckets[0]
-    "example-b1" = var.s3_buckets[1]
-    "example-c1" = var.s3_buckets[2]
-  }
-}
 
 output "c1_bucket_details" {
-  value = lookup(local.s3_buckets_map, "example-c1")
+  value = lookup(resource.s3_buckets_map, "example-c1")
 }
