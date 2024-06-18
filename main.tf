@@ -1,10 +1,17 @@
 provider "aws" {
   region = "us-east-1"
+  access_key = var.aws_access_key
+  secret_key = var.aws_secret
 }
 
-variable "aws_access_key"{
+variable "aws_access_key" {
+  description = "AWS Access Key"
+  type        = string
 }
+
 variable "aws_secret" {
+  description = "AWS Secret Key"
+  type        = string
 }
 
 variable "s3_buckets" {
@@ -44,7 +51,14 @@ resource "aws_s3_bucket" "c1" {
   acl    = var.s3_buckets[2].acl
 }
 
+locals {
+  s3_buckets_map = {
+    "example-a1" = var.s3_buckets[0]
+    "example-b1" = var.s3_buckets[1]
+    "example-c1" = var.s3_buckets[2]
+  }
+}
 
 output "c1_bucket_details" {
-  value = lookup(resource.s3_buckets_map, "example-c1")
+  value = lookup(local.s3_buckets_map, "example-c1")
 }
