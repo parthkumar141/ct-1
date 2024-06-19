@@ -1,0 +1,7 @@
+
+hooks:
+  all:
+    pre:
+      - type: oidc
+        provider: aws
+        role_arn: "arn:aws:iam::250806700386:role/terrateam"
